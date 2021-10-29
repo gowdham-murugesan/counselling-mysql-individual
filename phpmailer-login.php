@@ -67,7 +67,7 @@ $html = '<div class="">
                                     width="75"
                                     class="CToWUd"
                                     /> -->
-                                    <h2 style="color: red;">counseling-gowdham.herokuapp.com</h2>
+                                    <h2 style="color: red;">counselling-gowdham.herokuapp.com</h2>
                                     <div
                                     style="
                                         font-family: Google Sans, Roboto,
@@ -127,7 +127,7 @@ $html = '<div class="">
                                         style="padding-top: 32px; text-align: center"
                                     >
                                         <a
-                                        href="counseling-gowdham.herokuapp.com"
+                                        href="counselling-gowdham.herokuapp.com"
                                         style="
                                             font-family: Google Sans, Roboto,
                                             RobotoDraft, Helvetica, Arial,
@@ -226,7 +226,7 @@ try {
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'counseling.gowdham@gmail.com';                     //SMTP username
-    $mail->Password   = 'Asdf@2000';                               //SMTP password
+    $mail->Password   = 'ibewtxlhgevaonvy';                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
     $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -250,8 +250,8 @@ try {
 
     $mail->send();
     echo 'Message has been sent';
-    header("location:crud.php");
+    header("location:index.php");
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    header("location:crud.php");
+    header("location:index.php");
 }

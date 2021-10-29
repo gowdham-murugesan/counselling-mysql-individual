@@ -42,7 +42,7 @@ if(isset($_POST['but_submit'])){
             $error_message =  "Please verify your email to sign in. Please check with spam and promotions tab too.. If not received <a href='phpmailer.php?email=$email&name=$name'>Resend</a>";
         }
         else{
-            $error_message = "Invalid username and password";
+            $error_message = "Invalid username or password";
         }
 
     }
