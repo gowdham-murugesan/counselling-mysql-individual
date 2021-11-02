@@ -163,8 +163,9 @@ if(isset($_POST['but_logout'])){
   }
 
   .footer {
+    width: 100%;
     text-align: center;
-  position: sticky;
+  position: fixed;
   bottom: 0px;
   background-color: gray;
   color: white;
@@ -433,10 +434,10 @@ if(isset($_POST['but_logout'])){
       <label for="checkbox_toggle" class="hamburger" id="checkbox-label">&#9776;</label>
       <!-- NAVIGATION MENUS -->
       <div class="menu">
-        <li><a href="./index.php">Home</a></li>
+        <li><a href="./counselling.php">Home</a></li>
         <li><a href="./crud.php">Edit</a></li>
-        <li><a href="https://gowdham.herokuapp.com/">About us</a></li>
-        <li><a href="/">Contact</a></li>
+        <li><a href="https://gowdham.herokuapp.com/" target="_blank">About us</a></li>
+        <li><a href="https://gowdham.herokuapp.com/" target="_blank">Contact</a></li>
         <li class="account">
           <a><?php echo $_SESSION['name']?><i class="fa fa-chevron-down" style="padding: 0;"></i></a>
           <ul class="dropdown">

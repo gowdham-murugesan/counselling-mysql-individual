@@ -1,3 +1,40 @@
+<?php
+include "config.php";
+
+// Check user login or not
+if(!isset($_SESSION['uname'])){
+    header('Location: login.php');
+}
+
+// logout
+if(isset($_POST['but_logout'])){
+  session_destroy();
+  echo "<script>
+  window.location.href='./login.php';
+  alert('Successfully logged out');
+  </script>";
+}
+?>
+
+<?php
+  include "db.php";
+  $mysqli = new mysqli($servername, $user, $password, $database);
+    
+  // Checking for connections
+  if ($mysqli->connect_error) {
+      die('Connect Error (' . 
+      $mysqli->connect_errno . ') '.
+      $mysqli->connect_error);
+  }
+
+  $email = $_SESSION['uname'];
+    
+  // SQL query to select data from database
+  $mysqli->query("SET @row_number = 0;");
+  $sql = "SELECT (@row_number:=@row_number + 1) AS Serial, id, Choice_Order, College_Code, College_Name, Branch_Code, Branch_Name, Closing_Cutoff, Closing_Rank FROM counselling WHERE email = '$email' ORDER BY id;";
+  $result = $mysqli->query($sql);
+  $mysqli->close(); 
+  ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,8 +82,88 @@
       z-index: 100;
     }
 
-    .footer {
-        width: 100%;
+  #customers {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  #customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    line-height: 20px;
+  }
+
+  @media screen and (max-width: 400px) and (min-width: 360px) {
+    #customers td, #customers th, #customers td > span {
+    font-size: 6pt;
+    line-height: 14px;
+    }
+    .button {
+      width: 60px !important;
+      font-size: 6pt;
+      line-height: 14px;
+    }
+  }
+
+  @media screen and (max-width: 360px) {
+    #customers td, #customers th, .button, #customers td > span {
+    font-size: 5pt;
+    line-height: 10px;
+    }
+    .button {
+      font-size: 5pt;
+      line-height: 10px;
+    }
+  }
+
+  @media screen and (max-width: 500px) and (min-width: 400px) {
+    #customers td, #customers th, .button, #customers td > span {
+    font-size: 7pt;
+    line-height: 14px;
+  }
+  }
+
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+  #customers td:nth-child(1){width:10%; color: darkblue;}
+
+  #customers td:nth-child(2){width:10%; color: darkviolet;}
+
+  #customers td:nth-child(3){width:50%; color: green;}
+
+  #customers td:nth-child(4){width:20%; color: crimson;}
+
+  #customers td:nth-child(5){width:10%; color: darkslategrey;}
+
+  #customers tr:hover {background-color: rgba(130, 226, 173, 0.05);}
+
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: rgb(168 64 64);
+    color: white;
+  }
+
+  #myInput {
+    background-image: url('https://www.w3schools.com/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+  }
+
+  h1, h2{
+    text-align: center;
+    color: darkred;
+    font-size: 15pt;
+  }
+
+  .footer {
+    width: 100%;
     text-align: center;
   position: fixed;
   bottom: 0px;
@@ -78,118 +195,32 @@
     color: white;
   }
 
-  .body h1 {
-      text-align: center;
-      font-size: 24px;
-      color: darkred;
-      background: #9fddcc;
-      padding-top: 20px;
-      padding-bottom: 20px;
+  .button {
+  display: inline-block;
+  width: 75px;
+  padding: 5px 0px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-right: 10px;
   }
 
-  /* Create two equal columns that floats next to each other */
-    .column {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
-    }
-
-    /* Clear floats after the columns */
-    .row:after {
-    content: "";
-    display: table;
-    clear: both;
-    }
-
-    .second {
-        padding-top: 56px;
-    }
-
-    .second h2 {
-        font-size: 24px;
-    }
-
-    .second p {
-        font-size: 16px;
-        line-height: 1.8;
-        margin-right: 96px;
-    }
-
+  @media (max-width:768px) {
     .button {
-  display: inline-block;
-  border-radius: 4px;
-  background-color: teal;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 28px;
-  padding: 0px 0px 12px 0px;
-  width: 140px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
-}
+    padding: 5px 0px;
+    margin-top: 10px;
+    margin-right: 0;
+    }
+    .edit {
+      margin-bottom: -5px;
+    }
+  }
 
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-    @media screen and (min-width: 480px) and (max-width: 1000px) {
-    .column {
-        width: 100%;
-    }
-    .second {
-        margin-top: 100px;
-        margin-left: 54px;
-    }
-    }
-    @media screen and (max-width: 1000px) {
-    .column {
-        width: 100%;
-    }
-    .body h1 {
-        font-size: 16px;
-    }
-    .second {
-        padding-top: 0;
-        margin-top: -72px;
-    }
-    .second h2 {
-        font-size: 16px;
-    }
-    .second p {
-        font-size: 10px;
-        margin-right: auto;
-    }
-    .button {
-        font-size: 24px;
-        padding: 0px 0px 8px 0px;
-        width: 120px;
-    }
-    }
+  .icons {
+    margin-right: 10px;
+  }
 
 
   /* Navbar */
@@ -256,7 +287,6 @@
     /* DROPDOWN MENU */
     .account {
       position: relative;
-      cursor: pointer;
     }
 
     .dropdown {
@@ -391,7 +421,7 @@
 </div>
 
 <!-- Move to Top -->
-<!-- <button onclick="topFunction()" id="movetop" title="Go to top"><i class="fa fa-chevron-up w3-hover-opacity"></i></button> -->
+<button onclick="topFunction()" id="movetop" title="Go to top"><i class="fa fa-chevron-up w3-hover-opacity"></i></button>
 
 <nav class="navbar" id="navbar">
     <!-- LOGO -->
@@ -409,34 +439,64 @@
         <li><a href="https://gowdham.herokuapp.com/" target="_blank">About us</a></li>
         <li><a href="https://gowdham.herokuapp.com/" target="_blank">Contact</a></li>
         <li class="account">
-          <a href="./login.php">Login</i></a>
-        </li>
-        <li class="account">
-          <a href="./signup.php">Signup</i></a>
+          <a><?php echo $_SESSION['name']?><i class="fa fa-chevron-down" style="padding: 0;"></i></a>
+          <ul class="dropdown">
+            <li>
+              <a href="change.php" style="font-size: 11px; padding: 6px;">Change password</a>
+            </li>
+            <li>
+              <form method='post' action="">
+                <input type="submit" value="Logout" name="but_logout">
+              </form>
+            </li>
+          </ul>
         </li>
       </div>
     </ul>
   </nav>
 
-  <div class="body">
-      <h1>Now Counselling is paperless, Then why not counselling preparation?</h1>
+<div class="margin-8px">
+  <h1 style="padding-top: 20px; padding-bottom: 20px; background: #9fddcc; border-radius: 5px;"><?php echo $_SESSION['name']?>'s TNEA Counselling Choice Filling Order</h1>
+  <!-- <h2 style="color: rgb(139, 102, 0); margin-top: -10px;">For and By GOWDHAM M</h2> -->
 
-        <div class="row">
-        <div class="column">
-            <img src="./assets/home.png" alt="image" style="width: 100%;">
-        </div>
-        <div class="column second" >
-            <h2>Prepare your Choice list here...</h2>
-            <p>This Web application contains the list of all colleges with full details for TNEA counselling. You can create your preference order by just enter the college code or name, etc., You can also update your choice list by using CRUD (Create, Read, Update, Delete) opertaions.</p>
-            <a href="login.php" class="button" style="vertical-align:middle"><span>Login </span></a>
-            <a href="signup.php" class="button" style="vertical-align:middle"><span>Signup </span></a>
-        </div>
-        </div>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Choice Order, College Code, College Name, Branch Name..." title="Type in a name">
+  <div style="text-align: right; margin-bottom: 10px;">
+    
+    <form method='post' action="">
+    <a href="crud.php" class="button" style="background-color: green; width: 100px; padding: 10px 5px;" target="_blank">Edit</a>
+              <!-- <input type="submit" value="Logout" name="but_logout" class="button" style="background-color: red; width: 100px; padding: 8px 4px; cursor: pointer;"> -->
+          </form>
   </div>
-
-  <div class="footer">
+  <table id="customers">
+    <tr style="position: sticky; top: -1px;">
+      <th>Choice Order</th>
+      <th>College Code</th>
+      <th>College Name</th>
+      <th>Branch Name</th>
+      <th>2020 Closing Cutoff (Rank) for BC</th>
+    </tr>
+              <!-- PHP CODE TO FETCH DATA FROM ROWS-->
+              <?php   // LOOP TILL END OF DATA 
+                  while($rows=$result->fetch_assoc())
+                  {
+              ?>
+              <tr id=<?php echo $rows['id'];?>>
+                  <!--FETCHING DATA FROM EACH 
+                      ROW OF EVERY COLUMN-->
+                  <td><?php echo $rows['Serial'];?></td>
+                  <td><?php echo $rows['College_Code'];?></td>
+                  <td><?php echo $rows['College_Name'];?></td>
+                  <td><?php echo $rows['Branch_Name'];?><br><span style="color: green;">(<?php echo $rows['Branch_Code'];?>)</span></td>
+                  <td><?php echo $rows['Closing_Cutoff'];?><br><span style="color: #e42c81;">(<?php echo $rows['Closing_Rank'];?>)</span></td>
+              </tr>
+              <?php
+                  }
+              ?>
+          </table>
+          <div class="footer">
     <span>Gowdham M | Reach me at <a href="mailto:gowdhammurugesh24@gmail.com" target="_blank" class="fa fa-envelope"></a> <a href="https://www.linkedin.com/in/gowdham-murugesan/" target="_blank" class="fa fa-linkedin"></a> <a href="fb://profile/100008861406990" target="_blank" class="fa fa-facebook" id="phonescreen"></a> <a href="https://www.facebook.com/gowdhammurugesh24/" target="_blank" class="fa fa-facebook" id="laptopscreen"></a></span>
   </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -498,6 +558,45 @@
   }
   else {
     document.getElementById("phonescreen").style.display = "none";
+  }
+</script>
+                              
+<script>
+  var list = document.getElementsByClassName("serial");
+  for (var i = 1; i <= list.length; i++) {  
+    list[i-1].innerHTML = i;
+}
+</script>
+
+<script>
+  function myFunction() {
+    // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("customers");
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      td1 = tr[i].getElementsByTagName("td")[1];
+      td2 = tr[i].getElementsByTagName("td")[2];
+      td3 = tr[i].getElementsByTagName("td")[3];
+      td4 = tr[i].getElementsByTagName("td")[4];
+      if (td || td1 || td2 || td3 || td4) {
+        txtValue = td.textContent || td.innerText;
+        txtValue1 = td1.textContent || td1.innerText;
+        txtValue2 = td2.textContent || td2.innerText;
+        txtValue3 = td3.textContent || td3.innerText;
+        txtValue4 = td4.textContent || td4.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
   }
 </script>
 
