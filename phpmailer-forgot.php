@@ -10,7 +10,7 @@ $data = mysqli_fetch_array($records);
 $name = $data['name'];
 
 
-$link = "<a href='localhost/test1/new.php?key=".$email."&token=".$token."'>Set new password</a>";
+$link = "<a href='https://counselling-gowdham.herokuapp.com/new.php?key=".$email."&token=".$token."'>Set new password</a>";
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;

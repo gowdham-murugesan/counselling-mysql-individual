@@ -131,9 +131,8 @@
   }
 
   .footer {
-    width: 100%;
     text-align: center;
-  position: fixed;
+  position: sticky;
   bottom: 0px;
   background-color: gray;
   color: white;

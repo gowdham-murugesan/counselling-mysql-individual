@@ -3,7 +3,7 @@ $email = $_GET['email'];
 $name = $_GET['name'];
 
 $token = md5($email).rand(10,9999);
-$link = "localhost/test1/verify-email.php?key=".$email."&token=".$token."";
+$link = "https://counselling-gowdham.herokuapp.com/verify-email.php?key=".$email."&token=".$token."";
 $html = '<div style="padding:32px 10%;margin:0px;color:#333;background-color:#eeeeee"><div class="adM">
         </div><div style="background-color:#ffffff;width:600px;margin-left:auto;margin-right:auto"><div class="adM">
         </div><table style="background-color:#ffffff;width:600px;text-align:center" align="center">

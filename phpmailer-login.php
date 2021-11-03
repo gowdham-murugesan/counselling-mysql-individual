@@ -8,6 +8,14 @@ $place = $_GET['place'];
 $network = $_GET['network'];
 $useragent = $_GET['useragent'];
 
+include "config.php";
+
+$token = md5($email).rand(10,9999);
+$con->query("UPDATE users SET token = '$token' WHERE email = '$email';");
+$records = mysqli_query($con,"SELECT * from users where email = '$email';"); // fetch data from database
+$data = mysqli_fetch_array($records);
+$name = $data['name'];
+
 $html = '<div class="">
             <div class="aHl"></div>
             <div id=":117" tabindex="-1"></div>
@@ -127,7 +135,7 @@ $html = '<div class="">
                                         style="padding-top: 32px; text-align: center"
                                     >
                                         <a
-                                        href="counselling-gowdham.herokuapp.com"
+                                        href="https://counselling-gowdham.herokuapp.com/new.php?key='.$email.'&token='.$token.'"
                                         style="
                                             font-family: Google Sans, Roboto,
                                             RobotoDraft, Helvetica, Arial,
