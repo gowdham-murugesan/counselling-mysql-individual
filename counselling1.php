@@ -199,7 +199,7 @@
 </div>
 
 <h1>TNEA Counselling Choice Filling Order</h1>
-<h2 style="color: rgb(139, 102, 0); margin-top: -10px;">For and By GOWDHAM M</h2>
+<h2 style="color: rgb(139, 102, 0); margin-top: -10px;">For and By Powered by Gowdham M</h2>
 
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Choice Order, College Code, College Name, Branch Name..." title="Type in a name">
 <div style="text-align: right; margin-bottom: 10px;">
@@ -248,7 +248,7 @@
              ?>
         </table>
         <div class="footer">
-  <span>Gowdham M | Reach me at <a href="mailto:gowdhammurugesh24@gmail.com" target="_blank" class="fa fa-envelope"></a> <a href="https://www.linkedin.com/in/gowdham-murugesan/" target="_blank" class="fa fa-linkedin"></a> <a href="fb://profile/100008861406990" target="_blank" class="fa fa-facebook" id="phonescreen"></a> <a href="https://www.facebook.com/gowdhammurugesh24/" target="_blank" class="fa fa-facebook" id="laptopscreen"></a></span>
+  <span>Powered by Gowdham M | Reach me at <a href="mailto:gowdhammurugesh24@gmail.com" target="_blank" class="fa fa-envelope"></a> <a href="https://www.linkedin.com/in/gowdham-murugesan/" target="_blank" class="fa fa-linkedin"></a> <a href="fb://profile/100008861406990" target="_blank" class="fa fa-facebook" id="phonescreen"></a> <a href="https://www.facebook.com/gowdhammurugesh24/" target="_blank" class="fa fa-facebook" id="laptopscreen"></a></span>
 </div>
 
 <script>

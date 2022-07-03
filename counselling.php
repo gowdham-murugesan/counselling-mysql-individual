@@ -49,6 +49,8 @@ if(isset($_POST['but_logout'])){
     font-weight: bold;
     font-size: 10pt;
     font-family: verdana;
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
 
   html {
@@ -58,6 +60,15 @@ if(isset($_POST['but_logout'])){
   body {
     margin: 0;
     padding: 0;
+  }
+
+  table { 
+    page-break-inside:auto;
+  }
+
+  tr {
+    page-break-inside:avoid;
+    page-break-after:auto
   }
 
   .margin-8px {
@@ -411,6 +422,15 @@ if(isset($_POST['but_logout'])){
         padding: 4px 40px 0px 20px;
       }
     }
+
+    @media print {
+      #myInput, #edit-print {
+          display: none;
+      }
+      #footer {
+        position: static;
+      }
+    }
 </style>
 </head>
 <body>
@@ -456,12 +476,13 @@ if(isset($_POST['but_logout'])){
 
 <div class="margin-8px">
   <h1 style="padding-top: 20px; padding-bottom: 20px; background: #9fddcc; border-radius: 5px;"><?php echo $_SESSION['name']?>'s TNEA Counselling Choice Filling Order</h1>
-  <!-- <h2 style="color: rgb(139, 102, 0); margin-top: -10px;">For and By GOWDHAM M</h2> -->
+  <!-- <h2 style="color: rgb(139, 102, 0); margin-top: -10px;">For and By Powered by Gowdham M</h2> -->
 
   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Choice Order, College Code, College Name, Branch Name..." title="Type in a name">
   <div style="text-align: right; margin-bottom: 10px;">
     
-    <form method='post' action="">
+    <form method='post' action="" id="edit-print">
+    <a href="javascript:Print();" class="button" style="background-color: red; width: 100px; padding: 10px 5px;">Print</a>
     <a href="crud.php" class="button" style="background-color: green; width: 100px; padding: 10px 5px;" target="_blank">Edit</a>
               <!-- <input type="submit" value="Logout" name="but_logout" class="button" style="background-color: red; width: 100px; padding: 8px 4px; cursor: pointer;"> -->
           </form>
@@ -492,8 +513,8 @@ if(isset($_POST['but_logout'])){
                   }
               ?>
           </table>
-          <div class="footer">
-    <span>Gowdham M | Reach me at <a href="mailto:gowdhammurugesh24@gmail.com" target="_blank" class="fa fa-envelope"></a> <a href="https://www.linkedin.com/in/gowdham-murugesan/" target="_blank" class="fa fa-linkedin"></a> <a href="fb://profile/100008861406990" target="_blank" class="fa fa-facebook" id="phonescreen"></a> <a href="https://www.facebook.com/gowdhammurugesh24/" target="_blank" class="fa fa-facebook" id="laptopscreen"></a></span>
+          <div class="footer" id="footer">
+    <span><span style="font-size: 12px;">Powered by</span> Gowdham M | Reach me at <a href="mailto:gowdhammurugesh24@gmail.com" target="_blank" class="fa fa-envelope"></a> <a href="https://www.linkedin.com/in/gowdham-murugesan/" target="_blank" class="fa fa-linkedin"></a> <a href="fb://profile/100008861406990" target="_blank" class="fa fa-facebook" id="phonescreen"></a> <a href="https://www.facebook.com/gowdhammurugesh24/" target="_blank" class="fa fa-facebook" id="laptopscreen"></a></span>
   </div>
 </div>
 
@@ -520,6 +541,10 @@ if(isset($_POST['but_logout'])){
     } else {
       document.getElementById("checkbox-label").innerHTML = "&#9776;"
     }
+  }
+
+  function Print() {
+    window.print();
   }
 </script>
 
