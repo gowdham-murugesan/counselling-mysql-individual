@@ -20,6 +20,8 @@ if(isset($_POST['but_logout'])){
 	<title>Choice List - INPUT</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 	<script src="./counsellingcode.js"></script>
 	<script src="./counsellingrank.js"></script>
 	<style>
@@ -87,6 +89,25 @@ if(isset($_POST['but_logout'])){
 
 		#p_Branch_Code, #p_Branch_Name, #p_Closing_Cutoff, #p_Closing_Rank {
 			display: none;
+		}
+
+		.selectize-control {
+			padding: 0 !important;
+			margin: 8px 0;
+		}
+		.selectize-input {
+			padding: 12px 20px !important;
+		}
+		.item {
+			padding: 0 !important;
+			background-color: white !important;
+		}
+		.option {
+			background-color: white !important;
+			border-radius: 0px !important;
+		}
+		.active {
+			background-color: lightblue !important;
 		}
 	</style>
 </head>
@@ -167,6 +188,8 @@ if(isset($_POST['but_logout'])){
 		
 		if(isset($_POST['SubmitButton'])){
 
+		$isValid = true;
+
 		// servername => localhost
 		// username => root
 		// password => empty
@@ -188,35 +211,55 @@ if(isset($_POST['but_logout'])){
 		$Branch_Name = $_REQUEST['Branch_Name'];
 		$Closing_Cutoff = $_REQUEST['Closing_Cutoff'];
 		$Closing_Rank = $_POST['Closing_Rank'];
+
+		if($isValid){
+			// Check if College and course already exists
+			$sql_query = "SELECT count(*) as cntUser FROM counselling WHERE College_Code = '".$College_Code."' AND Branch_Code = '".$Branch_Code."'";
+			$result = mysqli_query($con,$sql_query);
+			$row = mysqli_fetch_array($result);
+
+			$count = $row['cntUser'];
+			if($count > 0){
+			  $isValid = false;
+			  $error_message = "Selected College and Course already exists";
+			  	echo "<script>
+				window.location.href='./input.php';
+				alert('Selected College and Course already exists');
+				</script>";
+			}
+	   
+		  }
 		
-		// Performing insert query execution
-		// here our table name is college
-		$conn->query("ALTER TABLE counselling AUTO_INCREMENT = 1");
-		$sql = "INSERT INTO counselling (College_Code, College_Name, Branch_Code, Branch_Name, Closing_Cutoff, Closing_Rank, email)
-				VALUES ('$College_Code', '$College_Name', '$Branch_Code', '$Branch_Name', '$Closing_Cutoff', '$Closing_Rank', '$email')";		
-		
-		if(mysqli_query($conn, $sql)){
+		  if($isValid){
+			// Performing insert query execution
+			// here our table name is college
+			$conn->query("ALTER TABLE counselling AUTO_INCREMENT = 1");
+			$sql = "INSERT INTO counselling (College_Code, College_Name, Branch_Code, Branch_Name, Closing_Cutoff, Closing_Rank, email)
+					VALUES ('$College_Code', '$College_Name', '$Branch_Code', '$Branch_Name', '$Closing_Cutoff', '$Closing_Rank', '$email')";		
+			
+			if(mysqli_query($conn, $sql)){
 
-			$conn->query("SET @count = (SELECT COUNT(*) FROM counselling);");
-            $conn->query("UPDATE counselling SET id = @count WHERE id = 0;");
-			$conn->query("SET @a:=0;");
-			$conn->query("UPDATE counselling SET id=@a:=@a+1 order by id;");
+				$conn->query("SET @count = (SELECT COUNT(*) FROM counselling);");
+				$conn->query("UPDATE counselling SET id = @count WHERE id = 0;");
+				$conn->query("SET @a:=0;");
+				$conn->query("UPDATE counselling SET id=@a:=@a+1 order by id;");
 
-			// echo "<h3>Data stored in database successfully."
-			// 	. " Please browse your localhost php my admin"
-			// 	. " to view the updated data</h3>";
+				// echo "<h3>Data stored in database successfully."
+				// 	. " Please browse your localhost php my admin"
+				// 	. " to view the updated data</h3>";
 
-			// echo nl2br("\nCollege_Code : $College_Code\n College_Name : $College_Name\n "
-			// 	. "Branch_Name : $Branch_Name\n Closing_Cutoff : $Closing_Cutoff");
+				// echo nl2br("\nCollege_Code : $College_Code\n College_Name : $College_Name\n "
+				// 	. "Branch_Name : $Branch_Name\n Closing_Cutoff : $Closing_Cutoff");
 
-			echo "<script>
-			window.location.href='./crud.php';
-			alert('Successfully added');
-			</script>";
-		} else{
-			echo "ERROR: Hush! Sorry $sql. "
-				. mysqli_error($conn);
-		}
+				echo "<script>
+				window.location.href='./crud.php';
+				alert('Successfully added');
+				</script>";
+			} else{
+				echo "ERROR: Hush! Sorry $sql. "
+					. mysqli_error($conn);
+			}
+		  }
 		
 		// Close connection
 		mysqli_close($conn);
@@ -227,6 +270,10 @@ if(isset($_POST['but_logout'])){
 	$(window).on('load', function () {
 		$('#loading').fadeOut();
 	});
+
+	$(document).ready(function () {
+      $('#College_Name').selectize();
+  	});
 	</script>
 	
 	<script>
@@ -283,7 +330,8 @@ if(isset($_POST['but_logout'])){
 				return obj1.coc === code;
 			})
 				var collegecode2 = code1[0].con;
-				document.getElementById('College_Name').value = collegecode2;
+				// document.getElementById('College_Name').value = collegecode2;
+				$('#College_Name').data('selectize').setValue(collegecode2);
 
 				var sel = document.getElementById('Branch_Name');
 				for (i = sel.length - 1; i > 0; i--) {
