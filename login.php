@@ -19,11 +19,13 @@ if(isset($_POST['but_submit'])){
         $row1 = mysqli_fetch_array($result1);
         $email = $row1['email'];
         $name = $row1['name'];
+        $comm = $row1['community'];
 
         if($count > 0 && $row1['roles'] == 'superadmin'){
             $_SESSION['super'] = $uname;
             $_SESSION['uname'] = $uname;
             $_SESSION['name'] = $name;
+            $_SESSION['comm'] = $comm;
             $success_message = "Welcome Super Admin, You are logged in successfully";
             // header("refresh:1;url=phpmailer-login.php?email=$email&name=$name");
             header("refresh:1;url=ip.php?email=$email&name=$name");
@@ -31,6 +33,7 @@ if(isset($_POST['but_submit'])){
         else if($count > 0 && $row1['roles'] == 'admin'){
             $_SESSION['uname'] = $uname;
             $_SESSION['name'] = $name;
+            $_SESSION['comm'] = $comm;
             $success_message = "Welcome $name, You are logged in successfully";
             // header("refresh:1;url=phpmailer-login.php?email=$email&name=$name");
             header("refresh:1;url=ip.php?email=$email&name=$name");

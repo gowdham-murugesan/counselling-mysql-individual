@@ -212,9 +212,13 @@ if(isset($_POST['but_logout'])){
 		$Closing_Cutoff = $_REQUEST['Closing_Cutoff'];
 		$Closing_Rank = $_POST['Closing_Rank'];
 
+		if($Closing_Rank == "") {
+			$Closing_Rank = "Not filled";
+		}
+
 		if($isValid){
 			// Check if College and course already exists
-			$sql_query = "SELECT count(*) as cntUser FROM counselling WHERE College_Code = '".$College_Code."' AND Branch_Code = '".$Branch_Code."'";
+			$sql_query = "SELECT count(*) as cntUser FROM counselling WHERE College_Code = '".$College_Code."' AND Branch_Code = '".$Branch_Code."'AND email = '".$email."'";
 			$result = mysqli_query($con,$sql_query);
 			$row = mysqli_fetch_array($result);
 
@@ -391,7 +395,7 @@ if(isset($_POST['but_logout'])){
 					       obj.coc == code &&
 						   obj.brn == branch;
 				});
-				var collegecutoff2 = collegecutoff[0].BC;
+				var collegecutoff2 = collegecutoff[0].<?php echo $_SESSION['comm'];?>;
 				document.getElementById('Closing_Cutoff').value = collegecutoff2;
 
 				let collegerank = counsellingrank.filter(obj => {
@@ -400,7 +404,7 @@ if(isset($_POST['but_logout'])){
 						   obj.brn == branch;
 				});
 				console.log(collegerank);
-				var collegerank2 = collegerank[0].BC;
+				var collegerank2 = collegerank[0].<?php echo $_SESSION['comm'];?>;
 				console.log(collegerank2);
 				document.getElementById('Closing_Rank').value = collegerank2;
 			}
