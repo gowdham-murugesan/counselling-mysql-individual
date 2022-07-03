@@ -16,6 +16,9 @@
 		$data = mysqli_fetch_array($qry);
 
 		if(isset($_POST['SubmitButton'])){
+
+		$isValid = true;
+
 		
 		// Taking all 5 values from the form data(input)
 		$College_Code = $_POST['College_Code'];
@@ -24,23 +27,49 @@
 		$Branch_Name = $_POST['Branch_Name'];
 		$Closing_Cutoff = $_POST['Closing_Cutoff'];
 		$Closing_Rank = $_POST['Closing_Rank'];
+
+		if($data['College_Code'])
+		if($isValid){
+			// Check if College and course already exists
+			$sql_query = "SELECT count(*) as cntUser FROM counselling WHERE College_Code = '".$College_Code."' AND Branch_Code = '".$Branch_Code."'";
+			$result = mysqli_query($conn,$sql_query);
+			$row = mysqli_fetch_array($result);
+
+			$count = $row['cntUser'];
+			if($count > 0){
+					$isValid = false;
+					if(($data['College_Code']==$College_Code) && ($data['Branch_Code']==$Branch_Code)) {
+						$isValid = true;
+					}
+					if(!$isValid) {
+						$error_message = "Selected College and Course already exists";
+						echo "<script>
+						window.location.href='edit.php?id=$id';
+						alert('Selected College and Course already exists');
+						</script>";
+					}
+					
+			}
+		  }
 		
-		// Performing insert query execution
-		// here our table name is college
-		// $conn->query("ALTER TABLE sql6434984.counselling AUTO_INCREMENT = 1");
-		$edit = mysqli_query($conn,"UPDATE counselling SET College_Code='$College_Code', College_Name='$College_Name', Branch_Code='$Branch_Code', Branch_Name='$Branch_Name', Closing_Cutoff='$Closing_Cutoff', Closing_Rank='$Closing_Rank' WHERE Choice_Order='$id'");
-		
-		if($edit)
-		{
-			mysqli_close($conn); // Close connection
-			header("location:crud.php#$id"); // redirects to all records page
-			exit;
+		  if($isValid){
+				// Performing insert query execution
+				// here our table name is college
+				// $conn->query("ALTER TABLE sql6434984.counselling AUTO_INCREMENT = 1");
+				$edit = mysqli_query($conn,"UPDATE counselling SET College_Code='$College_Code', College_Name='$College_Name', Branch_Code='$Branch_Code', Branch_Name='$Branch_Name', Closing_Cutoff='$Closing_Cutoff', Closing_Rank='$Closing_Rank' WHERE Choice_Order='$id'");
+				
+				if($edit)
+				{
+					mysqli_close($conn); // Close connection
+					header("location:crud.php#$id"); // redirects to all records page
+					exit;
+				}
+				else
+				{
+					echo mysqli_error();
+				}    	
+			}
 		}
-		else
-		{
-			echo mysqli_error();
-		}    	
-	}
 	?>
 	
 <!DOCTYPE html>
@@ -50,6 +79,8 @@
 	<title>Choice List - INPUT</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 	<script src="./counsellingcode.js"></script>
 	<script src="./counsellingrank.js"></script>
 	<style>
@@ -101,6 +132,25 @@
 		background-color: #f2f2f2;
 		padding: 20px;
 		}
+
+.selectize-control {
+	padding: 0 !important;
+	margin: 8px 0;
+}
+.selectize-input {
+	padding: 12px 20px !important;
+}
+.item {
+	padding: 0 !important;
+	background-color: white !important;
+}
+.option {
+	background-color: white !important;
+	border-radius: 0px !important;
+}
+.active {
+	background-color: lightblue !important;
+}
 	</style>
 </head>
 
@@ -179,6 +229,10 @@
 	$(window).on('load', function () {
 		$('#loading').fadeOut();
 	});
+
+	$(document).ready(function () {
+		$('#College_Name').selectize();
+	});
 	</script>
 	<script>
 			var testarray = [...new Set(counsellingcode.map(item => item.con))];
@@ -252,7 +306,8 @@
 				return obj1.coc === code;
 			})
 				var collegecode2 = code1[0].con;
-				document.getElementById('College_Name').value = collegecode2;
+				// document.getElementById('College_Name').value = collegecode2;
+				$('#College_Name').data('selectize').setValue(collegecode2);
 
 				var sel = document.getElementById('Branch_Name');
 				for (i = sel.length - 1; i >= 0; i--) {
