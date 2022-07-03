@@ -27,13 +27,15 @@ $error_message = "";$success_message = "";
 if(isset($_POST['btnsignup'])){
    $fname = trim($_POST['fname']);
    $email = trim($_POST['email']);
+   $num = trim($_POST['num']);
+   $comm = trim($_POST['comm']);
    $password = trim($_POST['password']);
    $confirmpassword = trim($_POST['confirmpassword']);
 
    $isValid = true;
 
    // Check fields are empty or not
-   if($fname == '' || $email == '' || $password == '' || $confirmpassword == ''){
+   if($fname == '' || $email == '' || $password == '' || $confirmpassword == '' || $num == '' || $comm == ''){
      $isValid = false;
      $error_message = "Please fill all fields.";
    }
@@ -68,9 +70,9 @@ if(isset($_POST['btnsignup'])){
    // Insert records
    if($isValid){
      $con->query("ALTER TABLE users AUTO_INCREMENT = 1;");
-     $insertSQL = "INSERT INTO users(name, email, password, roles) values(?,?,?,'Not verified')";
+     $insertSQL = "INSERT INTO users(name, email, password, number, community, roles) values(?,?,?,?,?,'Not verified')";
      $stmt = $con->prepare($insertSQL);
-     $stmt->bind_param("sss",$fname,$email,$password);
+     $stmt->bind_param("sssss",$fname,$email,$password,$num,$comm);
      $stmt->execute();
      $stmt->close();
 
@@ -191,6 +193,22 @@ if(isset($_POST['btnsignup'])){
             <br>
             <label for="email">Email address:</label>
             <input type="email" class="form-control" name="email" id="email" required="required" maxlength="80">
+            <br>
+            <label for="num">Mobile Number:</label>
+            <input type="tel" class="form-control" name="num" id="num" required="required" maxlength="10" pattern="[0-9]{10}">
+            <br>
+            <label for="comm">Community:</label>
+              <select class="form-control" name="comm" id="comm" required="required">
+                <option value="OC">OC</option>
+                <option value="BC" selected>BC</option>
+                <option value="BCM">BCM</option>
+                <option value="MBCV">MBCV</option>
+                <option value="MBCDNC">MBCDNC</option>
+                <option value="MBC">MBC</option>
+                <option value="SC">SC</option>
+                <option value="SCA">SCA</option>
+                <option value="ST">ST</option>
+            </select>
             <br>
             <label for="password">Password:</label>
             <input type="password" class="form-control" name="password" id="password" required="required" maxlength="80">

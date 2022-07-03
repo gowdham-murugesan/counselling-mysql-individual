@@ -472,7 +472,7 @@ if(isset($_POST['but_logout'])){
       <th>College Code</th>
       <th>College Name</th>
       <th>Branch Name</th>
-      <th>2020 Closing Cutoff (Rank) for BC</th>
+      <th>2021 Closing Cutoff (Rank) for <?php echo $_SESSION['comm'];?></th>
     </tr>
               <!-- PHP CODE TO FETCH DATA FROM ROWS-->
               <?php   // LOOP TILL END OF DATA 
