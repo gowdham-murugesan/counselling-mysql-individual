@@ -55,7 +55,7 @@ function myTime() {
 var today = new Date();
 const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 d = today.getDate()
-var date = (months[today.getMonth()+1]) + ' ' + d+(31==d||21==d||1==d?"st":22==d||2==d?"nd":23==d||3==d?"rd":"th") + ' ' + today.getFullYear();
+var date = (months[today.getMonth()]) + ' ' + d+(31==d||21==d||1==d?"st":22==d||2==d?"nd":23==d||3==d?"rd":"th") + ' ' + today.getFullYear();
 var hours = today.getHours();
 var minutes = today.getMinutes();
 var ampm = hours >= 12 ? 'pm' : 'am';
