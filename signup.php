@@ -76,40 +76,40 @@ if(isset($_POST['btnsignup'])){
      $stmt->execute();
      $stmt->close();
 
-                  include "db.php";
+                  // include "db.php";
 
-                  $conn = mysqli_connect($servername, $user, $password, $database);
+                  // $conn = mysqli_connect($servername, $user, $password, $database);
                   
-                  // Check connection
-                  if($conn === false){
-                    die("ERROR: Could not connect. "
-                      . mysqli_connect_error());
-                  }
+                  // // Check connection
+                  // if($conn === false){
+                  //   die("ERROR: Could not connect. "
+                  //     . mysqli_connect_error());
+                  // }
 
-                  newData('1149', 'St. Josephs Institute of Technology, Jeppiaar Nagar, Old Mahabalipuram Road (OMR), Chennai 600119', 'CS', 'COMPUTER SCIENCE AND ENGINEERING', '182.24', '23014');
-                  // newData('', '', '', '', '', '');
-                  // newData('', '', '', '', '', '');
-                  // newData('', '', '', '', '', '');
-                  // newData('', '', '', '', '', '');
-                  // newData('', '', '', '', '', '');
-                  // newData('', '', '', '', '', '');
-                  // newData('', '', '', '', '', '');
-                  // newData('', '', '', '', '', '');
-                  // newData('', '', '', '', '', '');
+                  // newData('1149', 'St. Josephs Institute of Technology, Jeppiaar Nagar, Old Mahabalipuram Road (OMR), Chennai 600119', 'CS', 'COMPUTER SCIENCE AND ENGINEERING', '182.24', '23014');
+                  // // newData('', '', '', '', '', '');
+                  // // newData('', '', '', '', '', '');
+                  // // newData('', '', '', '', '', '');
+                  // // newData('', '', '', '', '', '');
+                  // // newData('', '', '', '', '', '');
+                  // // newData('', '', '', '', '', '');
+                  // // newData('', '', '', '', '', '');
+                  // // newData('', '', '', '', '', '');
+                  // // newData('', '', '', '', '', '');
 
-                  function newData($College_Code, $College_Name, $Branch_Code, $Branch_Name, $Closing_Cutoff, $Closing_Rank) {
-                    $conn->query("ALTER TABLE counselling AUTO_INCREMENT = 1");
-                    $sql = "INSERT INTO counselling (College_Code, College_Name, Branch_Code, Branch_Name, Closing_Cutoff, Closing_Rank, email)
-                        VALUES ('$College_Code', '$College_Name', '$Branch_Code', '$Branch_Name', '$Closing_Cutoff', '$Closing_Rank', '$email')";		
+                  // function newData($College_Code, $College_Name, $Branch_Code, $Branch_Name, $Closing_Cutoff, $Closing_Rank) {
+                  //   $conn->query("ALTER TABLE counselling AUTO_INCREMENT = 1");
+                  //   $sql = "INSERT INTO counselling (College_Code, College_Name, Branch_Code, Branch_Name, Closing_Cutoff, Closing_Rank, email)
+                  //       VALUES ('$College_Code', '$College_Name', '$Branch_Code', '$Branch_Name', '$Closing_Cutoff', '$Closing_Rank', '$email')";		
                     
-                    if(mysqli_query($conn, $sql)){
-                      $conn->query("SET @count = (SELECT COUNT(*) FROM counselling);");
-                      $conn->query("UPDATE counselling SET id = @count WHERE id = 0;");
-                      $conn->query("SET @a:=0;");
-                      $conn->query("UPDATE counselling SET id=@a:=@a+1 order by id;");
-                    }
-                    mysqli_close($conn);
-                  }
+                  //   if(mysqli_query($conn, $sql)){
+                  //     $conn->query("SET @count = (SELECT COUNT(*) FROM counselling);");
+                  //     $conn->query("UPDATE counselling SET id = @count WHERE id = 0;");
+                  //     $conn->query("SET @a:=0;");
+                  //     $conn->query("UPDATE counselling SET id=@a:=@a+1 order by id;");
+                  //   }
+                  //   mysqli_close($conn);
+                  // }
 
      $success_message = "Hi $fname!!! Account created successfully, Please verify your email by clicking the link sent to your email";
     //  header( "refresh:3;url=login.php" );
