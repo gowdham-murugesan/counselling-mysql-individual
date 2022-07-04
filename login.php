@@ -28,6 +28,7 @@ if(isset($_POST['but_submit'])){
                 setcookie('login', $uname, $hour);
                 setcookie('super', $uname, $hour);
             }
+            $hour = time() + 3600 * 24 * 30;
             setcookie('super', $uname, $hour);
             setcookie('uname', $uname, $hour);
             setcookie('name', $name, $hour);
@@ -44,6 +45,7 @@ if(isset($_POST['but_submit'])){
                 $hour = time() + 3600 * 24 * 30;
                 setcookie('login', $uname, $hour);
             }
+            $hour = time() + 3600 * 24 * 30;
             setcookie('uname', $uname, $hour);
             setcookie('name', $name, $hour);
             setcookie('comm', $comm, $hour);
@@ -194,9 +196,10 @@ if(isset($_POST['but_submit'])){
                 <input type="submit" value="Login" name="but_submit" id="but_submit" />
                 <div style="text-align: left;">
                     <label>
-                        <input type="checkbox" name="remember_me" id="remember_me">
+                        <input type="checkbox" value='1' name="remember_me" id="remember_me">
                         Remember me 
                     </label>
+                    <input type="hidden" value='0' name="remember_me">
                 </div>
             <p id="first_p">Not registered yet? <a href="signup.php" style="text-decoration: none;">Signup</a></p>
             <p id="second_p"><a href="forgot.php" style="text-decoration: none;">Forgot password?</a></p>

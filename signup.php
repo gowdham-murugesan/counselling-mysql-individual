@@ -76,40 +76,37 @@ if(isset($_POST['btnsignup'])){
      $stmt->execute();
      $stmt->close();
 
-                  // include "db.php";
 
-                  // $conn = mysqli_connect($servername, $user, $password, $database);
-                  
-                  // // Check connection
-                  // if($conn === false){
-                  //   die("ERROR: Could not connect. "
-                  //     . mysqli_connect_error());
-                  // }
+                  function newData($College_Code, $College_Name, $Branch_Code, $Branch_Name, $Closing_Cutoff, $Closing_Rank, $email) {
 
-                  // newData('1149', 'St. Josephs Institute of Technology, Jeppiaar Nagar, Old Mahabalipuram Road (OMR), Chennai 600119', 'CS', 'COMPUTER SCIENCE AND ENGINEERING', '182.24', '23014');
-                  // // newData('', '', '', '', '', '');
-                  // // newData('', '', '', '', '', '');
-                  // // newData('', '', '', '', '', '');
-                  // // newData('', '', '', '', '', '');
-                  // // newData('', '', '', '', '', '');
-                  // // newData('', '', '', '', '', '');
-                  // // newData('', '', '', '', '', '');
-                  // // newData('', '', '', '', '', '');
-                  // // newData('', '', '', '', '', '');
-
-                  // function newData($College_Code, $College_Name, $Branch_Code, $Branch_Name, $Closing_Cutoff, $Closing_Rank) {
-                  //   $conn->query("ALTER TABLE counselling AUTO_INCREMENT = 1");
-                  //   $sql = "INSERT INTO counselling (College_Code, College_Name, Branch_Code, Branch_Name, Closing_Cutoff, Closing_Rank, email)
-                  //       VALUES ('$College_Code', '$College_Name', '$Branch_Code', '$Branch_Name', '$Closing_Cutoff', '$Closing_Rank', '$email')";		
+                    include "db.php";
+                    $conn = mysqli_connect($servername, $user, $password, $database);
                     
-                  //   if(mysqli_query($conn, $sql)){
-                  //     $conn->query("SET @count = (SELECT COUNT(*) FROM counselling);");
-                  //     $conn->query("UPDATE counselling SET id = @count WHERE id = 0;");
-                  //     $conn->query("SET @a:=0;");
-                  //     $conn->query("UPDATE counselling SET id=@a:=@a+1 order by id;");
-                  //   }
-                  //   mysqli_close($conn);
-                  // }
+                    // Check connection
+                    if($conn === false){
+                      die("ERROR: Could not connect. "
+                        . mysqli_connect_error());
+                    }
+                    $conn->query("ALTER TABLE counselling AUTO_INCREMENT = 1");
+                    $sql = "INSERT INTO counselling (College_Code, College_Name, Branch_Code, Branch_Name, Closing_Cutoff, Closing_Rank, email)
+                        VALUES ('$College_Code', '$College_Name', '$Branch_Code', '$Branch_Name', '$Closing_Cutoff', '$Closing_Rank', '$email')";		
+                    
+                    if(mysqli_query($conn, $sql)){
+                      $conn->query("SET @count = (SELECT COUNT(*) FROM counselling);");
+                      $conn->query("UPDATE counselling SET id = @count WHERE id = 0;");
+                      $conn->query("SET @a:=0;");
+                      $conn->query("UPDATE counselling SET id=@a:=@a+1 order by id;");
+                    }
+                    mysqli_close($conn);
+                  }
+
+                  newData('1', 'University Departments of Anna University, Chennai - CEG Campus, Sardar Patel Road, Guindy, Chennai 600 025', 'CS', 'COMPUTER SCIENCE AND ENGINEERING', '198.12', '111', $email);
+                  newData('1', 'University Departments of Anna University, Chennai - CEG Campus, Sardar Patel Road, Guindy, Chennai 600 025', 'EC', 'ELECTRONICS AND COMMUNICATION ENGINEERING', '197.3333333', '332', $email);
+                  newData('4', 'University Departments of Anna University, Chennai - MIT Campus, Chrompet, Tambaram Taluk, Chengalpattu District 600 044', 'CS', 'COMPUTER SCIENCE AND ENGINEERING', '196.825', '493', $email);
+                  newData('2005', 'Government College of Technology (Autonomous), Thadagam Road, Coimbatore District 641013', 'CS', 'COMPUTER SCIENCE AND ENGINEERING', '193.78', '2178', $email);
+                  newData('2005', 'Government College of Technology (Autonomous), Thadagam Road, Coimbatore District 641013', 'IT', 'INFORMATION TECHNOLOGY', '192.735', '3181', $email);
+
+
 
      $success_message = "Hi $fname!!! Account created successfully, Please verify your email by clicking the link sent to your email";
     //  header( "refresh:3;url=login.php" );
