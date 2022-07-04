@@ -416,6 +416,11 @@ if(isset($_POST['but_logout'])){
         padding: 4px 40px 0px 20px;
       }
     }
+
+    .iconspin {
+      margin: 0 -6px !important;
+      width: auto !important;
+    }
 </style>
 </head>
 <body>
@@ -489,7 +494,7 @@ if(isset($_POST['but_logout'])){
                       ROW OF EVERY COLUMN-->
                   <td><?php echo $rows['Serial'];?></td>
                   <td><?php echo $rows['College_Code'];?></td>
-                  <td><?php echo $rows['College_Name'];?><br><a href="order.php?id=<?php echo $rows['id']; ?>&order=up" onclick="return up('up<?php echo $rows['id']; ?>');" class="icons"><i class="fa fa-chevron-circle-up" style="font-size:40px;color:lightseagreen" id="up<?php echo $rows['id']; ?>"></i></a><a href="order.php?id=<?php echo $rows['id']; ?>&order=down" onclick="return down('down<?php echo $rows['id']; ?>');" class="icons" style="margin-right: 20px;"><i class="fa fa-chevron-circle-down" style="font-size:40px;color:lightseagreen" id="down<?php echo $rows['id']; ?>"></i></a><a href="edit.php?id=<?php echo $rows['Choice_Order']; ?>" onclick="return edit('edit<?php echo $rows['id']; ?>');" class="button edit" style="background-color: orange;">Edit<i id="edit<?php echo $rows['id']; ?>"></i></a><a href="delete.php?id=<?php echo $rows['Choice_Order']; ?>" onclick="return deleting('delete<?php echo $rows['id']; ?>');" class="button" style="background-color: red;">Delete<i id="delete<?php echo $rows['id']; ?>"></i></a></td>
+                  <td><?php echo $rows['College_Name'];?><br><a href="order.php?id=<?php echo $rows['id']; ?>&order=up" onclick="return up('up<?php echo $rows['id']; ?>');" class="icons"><i class="fa fa-chevron-circle-up iconspin" style="font-size:40px;color:lightseagreen" id="up<?php echo $rows['id']; ?>"></i></a><a href="order.php?id=<?php echo $rows['id']; ?>&order=down" onclick="return down('down<?php echo $rows['id']; ?>');" class="icons" style="margin-right: 20px;"><i class="fa fa-chevron-circle-down iconspin" style="font-size:40px;color:lightseagreen" id="down<?php echo $rows['id']; ?>"></i></a><a href="edit.php?id=<?php echo $rows['Choice_Order']; ?>" onclick="return edit('edit<?php echo $rows['id']; ?>');" class="button edit" style="background-color: orange;">Edit<i id="edit<?php echo $rows['id']; ?>"></i></a><a href="delete.php?id=<?php echo $rows['Choice_Order']; ?>" onclick="return deleting('delete<?php echo $rows['id']; ?>');" class="button" style="background-color: red;">Delete<i id="delete<?php echo $rows['id']; ?>"></i></a></td>
                   <td><?php echo $rows['Branch_Name'];?><br><span style="color: green;">(<?php echo $rows['Branch_Code'];?>)</span></td>
                   <td><?php echo $rows['Closing_Cutoff'];?><br><span style="color: #e42c81;">(<?php echo $rows['Closing_Rank'];?>)</span></td>
               </tr>
