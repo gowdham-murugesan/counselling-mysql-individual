@@ -461,7 +461,6 @@ if(isset($_POST['but_logout'])){
         <li><a href="./counselling.php">Home</a></li>
         <li><a href="./crud.php" target="_blank">Edit</a></li>
         <li><a href="https://gowdham.herokuapp.com/" target="_blank">About us</a></li>
-        <li><a href="https://gowdham.herokuapp.com/" target="_blank">Contact</a></li>
         <li class="account">
           <a><?php echo $_COOKIE['name']?><i class="fa fa-chevron-down" style="padding: 0;"></i></a>
           <ul class="dropdown">

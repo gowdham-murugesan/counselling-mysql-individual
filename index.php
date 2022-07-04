@@ -407,7 +407,6 @@
         <li><a href="./counselling.php">Home</a></li>
         <li><a href="./crud.php" target="_blank">Edit</a></li>
         <li><a href="https://gowdham.herokuapp.com/" target="_blank">About us</a></li>
-        <li><a href="https://gowdham.herokuapp.com/" target="_blank">Contact</a></li>
         <li class="account">
           <a href="./login.php">Login</i></a>
         </li>
@@ -419,7 +418,7 @@
   </nav>
 
   <div class="body">
-      <h1>Now Counselling is paperless, Then why not counselling preparation?</h1>
+      <h1>Now TNEA Counselling is paperless, Then why not counselling preparation?</h1>
 
         <div class="row">
         <div class="column">
@@ -428,14 +427,13 @@
         <div class="column second" >
             <h2>Prepare your Choice list here...</h2>
             <p>This Web application contains the list of all colleges with full details for TNEA counselling. You can create your preference order by just enter the college code or name, etc., You can also update your choice list by using CRUD (Create, Read, Update, Delete) opertaions.</p>
-            <a href="login.php" class="button" style="vertical-align:middle"><span>Login </span></a>
-            <a href="signup.php" class="button" style="vertical-align:middle"><span>Signup </span></a>
+            <a href="counselling.php" class="button" style="vertical-align:middle"><span>Get Started</span></a>
         </div>
         </div>
   </div>
 
   <div class="footer">
-    <span>Powered by Gowdham M | Reach me at <a href="mailto:gowdhammurugesh24@gmail.com" target="_blank" class="fa fa-envelope"></a> <a href="https://www.linkedin.com/in/gowdham-murugesan/" target="_blank" class="fa fa-linkedin"></a> <a href="fb://profile/100008861406990" target="_blank" class="fa fa-facebook" id="phonescreen"></a> <a href="https://www.facebook.com/gowdhammurugesh24/" target="_blank" class="fa fa-facebook" id="laptopscreen"></a></span>
+    <span><span style="font-size: 12px;">Powered by</span> Gowdham M | Reach me at <a href="mailto:gowdhammurugesh24@gmail.com" target="_blank" class="fa fa-envelope"></a> <a href="https://www.linkedin.com/in/gowdham-murugesan/" target="_blank" class="fa fa-linkedin"></a> <a href="fb://profile/100008861406990" target="_blank" class="fa fa-facebook" id="phonescreen"></a> <a href="https://www.facebook.com/gowdhammurugesh24/" target="_blank" class="fa fa-facebook" id="laptopscreen"></a></span>
   </div>
 
 <script>

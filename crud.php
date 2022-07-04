@@ -446,7 +446,6 @@ if(isset($_POST['but_logout'])){
         <li><a href="./counselling.php">Home</a></li>
         <li><a href="./crud.php">Edit</a></li>
         <li><a href="https://gowdham.herokuapp.com/" target="_blank">About us</a></li>
-        <li><a href="https://gowdham.herokuapp.com/" target="_blank">Contact</a></li>
         <li class="account">
           <a><?php echo $_COOKIE['name']?><i class="fa fa-chevron-down" style="padding: 0;"></i></a>
           <ul class="dropdown">
@@ -466,7 +465,7 @@ if(isset($_POST['but_logout'])){
 
 <div class="margin-8px">
   <h1 style="padding-top: 20px; padding-bottom: 20px; background: #9fddcc; border-radius: 5px;"><?php echo $_COOKIE['name']?>'s TNEA Counselling Choice Filling Order</h1>
-  <!-- <h2 style="color: rgb(139, 102, 0); margin-top: -10px;">For and By Powered by Gowdham M</h2> -->
+  <!-- <h2 style="color: rgb(139, 102, 0); margin-top: -10px;">For and By <span style="font-size: 12px;">Powered by</span> Gowdham M</h2> -->
 
   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Choice Order, College Code, College Name, Branch Name..." title="Type in a name">
   <div style="text-align: right; margin-bottom: 10px;">
@@ -503,7 +502,7 @@ if(isset($_POST['but_logout'])){
               ?>
           </table>
           <div class="footer">
-    <span>Powered by Gowdham M | Reach me at <a href="mailto:gowdhammurugesh24@gmail.com" target="_blank" class="fa fa-envelope"></a> <a href="https://www.linkedin.com/in/gowdham-murugesan/" target="_blank" class="fa fa-linkedin"></a> <a href="fb://profile/100008861406990" target="_blank" class="fa fa-facebook" id="phonescreen"></a> <a href="https://www.facebook.com/gowdhammurugesh24/" target="_blank" class="fa fa-facebook" id="laptopscreen"></a></span>
+    <span><span style="font-size: 12px;">Powered by</span> Gowdham M | Reach me at <a href="mailto:gowdhammurugesh24@gmail.com" target="_blank" class="fa fa-envelope"></a> <a href="https://www.linkedin.com/in/gowdham-murugesan/" target="_blank" class="fa fa-linkedin"></a> <a href="fb://profile/100008861406990" target="_blank" class="fa fa-facebook" id="phonescreen"></a> <a href="https://www.facebook.com/gowdhammurugesh24/" target="_blank" class="fa fa-facebook" id="laptopscreen"></a></span>
   </div>
 </div>
 
