@@ -364,7 +364,7 @@
 					       obj.coc == code &&
 						   obj.brn == branch;
 				});
-				var collegecutoff2 = collegecutoff[0].<?php echo $_SESSION['comm'];?>;
+				var collegecutoff2 = collegecutoff[0].<?php echo $_COOKIE['comm'];?>;
 				document.getElementById('Closing_Cutoff').value = collegecutoff2;
 
 				let collegerank = counsellingrank.filter(obj => {
@@ -373,7 +373,7 @@
 						obj.brn == branch;
 				});
 				console.log(collegerank);
-				var collegerank2 = collegerank[0].<?php echo $_SESSION['comm'];?>;
+				var collegerank2 = collegerank[0].<?php echo $_COOKIE['comm'];?>;
 				console.log(collegerank2);
 				document.getElementById('Closing_Rank').value = collegerank2;
 			}

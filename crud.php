@@ -2,13 +2,18 @@
 include "config.php";
 
 // Check user login or not
-if(!isset($_SESSION['uname'])){
+if(!isset($_SESSION['login']) && !isset($_COOKIE['login'])){
     header('Location: login.php');
 }
 
 // logout
 if(isset($_POST['but_logout'])){
   session_destroy();
+  setcookie("login", "", time() - 3600);
+  setcookie("super", "", time() - 3600);
+  setcookie("uname", "", time() - 3600);
+  setcookie("name", "", time() - 3600);
+  setcookie("comm", "", time() - 3600);
   echo "<script>
   window.location.href='./login.php';
   alert('Successfully logged out');
@@ -27,7 +32,7 @@ if(isset($_POST['but_logout'])){
       $mysqli->connect_error);
   }
 
-  $email = $_SESSION['uname'];
+  $email = $_COOKIE['uname'];
     
   // SQL query to select data from database
   $mysqli->query("SET @row_number = 0;");
@@ -438,7 +443,7 @@ if(isset($_POST['but_logout'])){
         <li><a href="https://gowdham.herokuapp.com/" target="_blank">About us</a></li>
         <li><a href="https://gowdham.herokuapp.com/" target="_blank">Contact</a></li>
         <li class="account">
-          <a><?php echo $_SESSION['name']?><i class="fa fa-chevron-down" style="padding: 0;"></i></a>
+          <a><?php echo $_COOKIE['name']?><i class="fa fa-chevron-down" style="padding: 0;"></i></a>
           <ul class="dropdown">
             <li>
               <a href="change.php" style="font-size: 11px; padding: 6px;">Change password</a>
@@ -455,7 +460,7 @@ if(isset($_POST['but_logout'])){
   </nav>
 
 <div class="margin-8px">
-  <h1 style="padding-top: 20px; padding-bottom: 20px; background: #9fddcc; border-radius: 5px;"><?php echo $_SESSION['name']?>'s TNEA Counselling Choice Filling Order</h1>
+  <h1 style="padding-top: 20px; padding-bottom: 20px; background: #9fddcc; border-radius: 5px;"><?php echo $_COOKIE['name']?>'s TNEA Counselling Choice Filling Order</h1>
   <!-- <h2 style="color: rgb(139, 102, 0); margin-top: -10px;">For and By Powered by Gowdham M</h2> -->
 
   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Choice Order, College Code, College Name, Branch Name..." title="Type in a name">
@@ -472,7 +477,7 @@ if(isset($_POST['but_logout'])){
       <th>College Code</th>
       <th>College Name</th>
       <th>Branch Name</th>
-      <th>2021 Closing Cutoff (Rank) for <?php echo $_SESSION['comm'];?></th>
+      <th>2021 Closing Cutoff (Rank) for <?php echo $_COOKIE['comm'];?></th>
     </tr>
               <!-- PHP CODE TO FETCH DATA FROM ROWS-->
               <?php   // LOOP TILL END OF DATA 

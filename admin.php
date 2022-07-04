@@ -2,7 +2,7 @@
 include "config.php";
 
 // Check user login or not
-if(!isset($_SESSION['super'])){
+if(!isset($_SESSION['super']) && !isset($_COOKIE['super'])){
     // header('Location: crud.php');
     echo "<script>
     window.location.href='./crud.php';
@@ -13,6 +13,11 @@ if(!isset($_SESSION['super'])){
 // logout
 if(isset($_POST['but_logout'])){
     session_destroy();
+    setcookie("login", "", time() - 3600);
+    setcookie("super", "", time() - 3600);
+    setcookie("uname", "", time() - 3600);
+    setcookie("name", "", time() - 3600);
+    setcookie("comm", "", time() - 3600);
     echo "<script>
     window.location.href='./login.php';
     alert('Successfully logged out');
