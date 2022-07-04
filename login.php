@@ -22,18 +22,32 @@ if(isset($_POST['but_submit'])){
         $comm = $row1['community'];
 
         if($count > 0 && $row1['roles'] == 'superadmin'){
+            if($_POST["remember_me"]=='1' || $_POST["remember_me"]=='on')
+            {
+                $hour = time() + 3600 * 24 * 30;
+                setcookie('login', $uname, $hour);
+                setcookie('super', $uname, $hour);
+            }
+            setcookie('super', $uname, $hour);
+            setcookie('uname', $uname, $hour);
+            setcookie('name', $name, $hour);
+            setcookie('comm', $comm, $hour);
+            $_SESSION['login'] = $uname;
             $_SESSION['super'] = $uname;
-            $_SESSION['uname'] = $uname;
-            $_SESSION['name'] = $name;
-            $_SESSION['comm'] = $comm;
             $success_message = "Welcome Super Admin, You are logged in successfully";
             // header("refresh:1;url=phpmailer-login.php?email=$email&name=$name");
             header("refresh:1;url=ip.php?email=$email&name=$name");
         }
         else if($count > 0 && $row1['roles'] == 'admin'){
-            $_SESSION['uname'] = $uname;
-            $_SESSION['name'] = $name;
-            $_SESSION['comm'] = $comm;
+            if($_POST["remember_me"]=='1' || $_POST["remember_me"]=='on')
+            {
+                $hour = time() + 3600 * 24 * 30;
+                setcookie('login', $uname, $hour);
+            }
+            setcookie('uname', $uname, $hour);
+            setcookie('name', $name, $hour);
+            setcookie('comm', $comm, $hour);
+            $_SESSION['login'] = $uname;
             $success_message = "Welcome $name, You are logged in successfully";
             // header("refresh:1;url=phpmailer-login.php?email=$email&name=$name");
             header("refresh:1;url=ip.php?email=$email&name=$name");
@@ -178,6 +192,12 @@ if(isset($_POST['but_submit'])){
                 <input type="email" class="textbox" id="txt_uname" name="txt_uname" placeholder="Email" /> <br><br>
                 <input type="password" class="textbox" id="txt_uname" name="txt_pwd" placeholder="Password"/> <br><br>
                 <input type="submit" value="Login" name="but_submit" id="but_submit" />
+                <div style="text-align: left;">
+                    <label>
+                        <input type="checkbox" name="remember_me" id="remember_me">
+                        Remember me 
+                    </label>
+                </div>
             <p id="first_p">Not registered yet? <a href="signup.php" style="text-decoration: none;">Signup</a></p>
             <p id="second_p"><a href="forgot.php" style="text-decoration: none;">Forgot password?</a></p>
         </div>

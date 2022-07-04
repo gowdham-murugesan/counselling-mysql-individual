@@ -9,7 +9,7 @@
       $mysqli->connect_error);
   }
 
-  $email = $_SESSION['uname'];
+  $email = $_COOKIE['uname'];
     
   // SQL query to select data from database
   $mysqli->query("SET @row_number = 0;");
@@ -211,7 +211,7 @@
     <th>College Code</th>
     <th>College Name</th>
     <th>Branch Name</th>
-    <th>2021 Closing Cutoff (Rank) for <?php echo $_SESSION['comm'];?></th>
+    <th>2021 Closing Cutoff (Rank) for <?php echo $_COOKIE['comm'];?></th>
   </tr>
             <!-- PHP CODE TO FETCH DATA FROM ROWS-->
             <?php   // LOOP TILL END OF DATA 

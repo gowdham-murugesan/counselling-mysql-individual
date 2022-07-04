@@ -11,7 +11,7 @@
 
 		$id = $_GET['id'];
         $order = $_GET['order'];
-        $email = $_SESSION['uname'];
+        $email = $_COOKIE['uname'];
 
         if($order=='up')
         {

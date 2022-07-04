@@ -2,13 +2,18 @@
 include "config.php";
 
 // Check user login or not
-if(!isset($_SESSION['uname'])){
+if(!isset($_SESSION['login']) && !isset($_COOKIE['login'])){
     header('Location: login.php');
 }
 
 // logout
 if(isset($_POST['but_logout'])){
     session_destroy();
+	setcookie("login", "", time() - 3600);
+	setcookie("super", "", time() - 3600);
+	setcookie("uname", "", time() - 3600);
+	setcookie("name", "", time() - 3600);
+	setcookie("comm", "", time() - 3600);
     header('Location: login.php');
 }
 ?>
@@ -202,7 +207,7 @@ if(isset($_POST['but_logout'])){
 				. mysqli_connect_error());
 		}
 
-		$email = $_SESSION['uname'];
+		$email = $_COOKIE['uname'];
 		
 		// Taking all 5 values from the form data(input)
 		$College_Code = $_REQUEST['College_Code'];
@@ -395,7 +400,7 @@ if(isset($_POST['but_logout'])){
 					       obj.coc == code &&
 						   obj.brn == branch;
 				});
-				var collegecutoff2 = collegecutoff[0].<?php echo $_SESSION['comm'];?>;
+				var collegecutoff2 = collegecutoff[0].<?php echo $_COOKIE['comm'];?>;
 				document.getElementById('Closing_Cutoff').value = collegecutoff2;
 
 				let collegerank = counsellingrank.filter(obj => {
@@ -404,7 +409,7 @@ if(isset($_POST['but_logout'])){
 						   obj.brn == branch;
 				});
 				console.log(collegerank);
-				var collegerank2 = collegerank[0].<?php echo $_SESSION['comm'];?>;
+				var collegerank2 = collegerank[0].<?php echo $_COOKIE['comm'];?>;
 				console.log(collegerank2);
 				document.getElementById('Closing_Rank').value = collegerank2;
 			}

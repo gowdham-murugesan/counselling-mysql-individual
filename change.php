@@ -1,6 +1,6 @@
 <?php 
 include "config.php";
-$email = $_SESSION['uname'];
+$email = $_COOKIE['uname'];
 ?>
 <!DOCTYPE html>
 <html>
