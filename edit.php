@@ -168,7 +168,7 @@
 			
 <p>
 				<label for="College_Code">College Code :</label>
-				<input type="number" name="College_Code" id="College_Code" value="<?php echo $data['College_Code'] ?>" autocomplete="off" oninput="Code(); Cutoff(); return false;">
+				<input type="number" name="College_Code" id="College_Code" value="<?php echo $data['College_Code'] ?>" autocomplete="off" oninput="Code(); Cutoff(); return false;" required>
 			</p>
 
 
@@ -177,7 +177,7 @@
 			
 <p>
 				<label for="College_Name">College Name :</label>
-				<select name="College_Name" id="College_Name" autocomplete="off" onchange="College(); Cutoff(); return false;">
+				<select name="College_Name" id="College_Name" autocomplete="off" onchange="College(); Cutoff(); return false;" required>
 					<option value="<?php echo $data['College_Name'] ?>" selected hidden><?php echo $data['College_Name'] ?></option>
 				</select>
 			</p>
@@ -188,7 +188,7 @@
 			
 <p>
 				<label for="Branch_Code">Branch Code :</label>
-				<select name="Branch_Code" id="Branch_Code" onchange="Branch(); Cutoff(); return false;">
+				<select name="Branch_Code" id="Branch_Code" onchange="Branch(); Cutoff(); return false;" required>
 					<option value="<?php echo $data['Branch_Code'] ?>" selected hidden><?php echo $data['Branch_Code'] ?></option>
 				</select>
 			</p>
@@ -199,7 +199,7 @@
 			
 <p>
 				<label for="Branch_Name">Branch Name :</label>
-				<select name="Branch_Name" id="Branch_Name" onchange="BranchName(); Cutoff(); return false;">
+				<select name="Branch_Name" id="Branch_Name" onchange="BranchName(); Cutoff(); return false;" required>
 					<option value="<?php echo $data['Branch_Name'] ?>" selected hidden><?php echo $data['Branch_Name'] ?></option>
 				</select>
 			</p>

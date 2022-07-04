@@ -128,7 +128,7 @@ if(isset($_POST['but_logout'])){
 			
 <p id="p_College_Code">
 				<label for="College_Code">College Code :</label>
-				<input type="number" name="College_Code" id="College_Code" placeholder="Enter College Code..." autocomplete="off" oninput="Code(); Cutoff(); return false;">
+				<input type="number" name="College_Code" id="College_Code" placeholder="Enter College Code..." autocomplete="off" oninput="Code(); Cutoff(); return false;" required>
 			</p>
 
 
@@ -137,7 +137,7 @@ if(isset($_POST['but_logout'])){
 			
 <p id="p_College_Name">
 				<label for="College_Name">College Name :</label>
-				<select name="College_Name" id="College_Name" autocomplete="off" onchange="College(); Cutoff(); return false;">
+				<select name="College_Name" id="College_Name" autocomplete="off" onchange="College(); Cutoff(); return false;" required>
 					<option value="" disabled selected hidden>Select College Name...</option>
 				</select>
 			</p>
@@ -148,7 +148,7 @@ if(isset($_POST['but_logout'])){
 			
 <p id="p_Branch_Code">
 				<label for="Branch_Code">Branch Code :</label>
-				<select name="Branch_Code" id="Branch_Code" onchange="Branch(); Cutoff(); return false;">
+				<select name="Branch_Code" id="Branch_Code" onchange="Branch(); Cutoff(); return false;" required>
 					<option value="" disabled selected hidden>Select Branch Code...</option>
 				</select>
 			</p>
@@ -159,7 +159,7 @@ if(isset($_POST['but_logout'])){
 			
 <p id="p_Branch_Name">
 				<label for="Branch_Name">Branch Name :</label>
-				<select name="Branch_Name" id="Branch_Name" onchange="BranchName(); Cutoff(); return false;">
+				<select name="Branch_Name" id="Branch_Name" onchange="BranchName(); Cutoff(); return false;" required>
 					<option value="" disabled selected hidden>Select Branch Name...</option>
 				</select>
 			</p>
