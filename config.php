@@ -3,10 +3,15 @@ if(session_id() == '') {
   session_start();
 }
 
-$host = "sql6.freemysqlhosting.net"; /* Host name */
-$user = "sql6434984"; /* User */
-$password = "vA3VgpXckB"; /* Password */
-$dbname = "sql6434984"; /* Database name */
+// $host = "sql6.freemysqlhosting.net"; /* Host name */
+// $user = "sql6434984"; /* User */
+// $password = "vA3VgpXckB"; /* Password */
+// $dbname = "sql6434984"; /* Database name */
+
+  $servername = "remotemysql.com"; /* Host name */
+  $user = "WTTjuFFAHW"; /* User */
+  $password = "Ob6CX7wiwc"; /* Password */
+  $database = "WTTjuFFAHW"; /* Database name */
 
 // $host = "localhost"; /* Host name */
 // $user = "root"; /* User */
