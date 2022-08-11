@@ -8,10 +8,15 @@ if(session_id() == '') {
 // $password = "vA3VgpXckB"; /* Password */
 // $dbname = "sql6434984"; /* Database name */
 
-$host = "remotemysql.com"; /* Host name */
-$user = "WTTjuFFAHW"; /* User */
-$password = "Ob6CX7wiwc"; /* Password */
-$dbname = "WTTjuFFAHW"; /* Database name */
+// $host = "db4free.net"; /* Host name */
+// $user = "gowdham"; /* User */
+// $password = "Santhosh@2000"; /* Password */
+// $dbname = "gowdham_counsel"; /* Database name */
+
+$host = "sql6.freemysqlhosting.net"; /* Host name */
+$user = "sql6512224"; /* User */
+$password = "byJ9SXQVxq"; /* Password */
+$dbname = "sql6512224"; /* Database name */
 
 // $host = "localhost"; /* Host name */
 // $user = "root"; /* User */
